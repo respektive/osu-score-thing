@@ -45,10 +45,10 @@
       <input type="password" id="apikey" name="apikey"><br>
       <label for="mode">gamemode:</label>
       <select name="mode" id="mode">
-        <option value=0>osu!</option>
-        <option value=1>osu!taiko</option>
-        <option value=2>osu!catch</option>
-        <option value=3>osu!mania</option>
+        <option id="select0" value=0>osu!</option>
+        <option id="select1" value=1>osu!taiko</option>
+        <option id="select2" value=2>osu!catch</option>
+        <option id="select3" value=3>osu!mania</option>
       </select> 
     </form>
   <p>updating credentials requires restart</p>
@@ -844,6 +844,10 @@ function handleWindowControls() {
 
       ipcRenderer.on('apikey', (event, data) => {
         document.getElementById("apikey").setAttribute("value", data)
+      });
+
+      ipcRenderer.on('mode', (event, data) => {
+        document.getElementById("select"+data).setAttribute("selected", "")
       });
 
     </script>

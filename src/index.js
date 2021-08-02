@@ -356,11 +356,11 @@ getUserBest().then(userBest => {
 		mainWindow.webContents.send('ranksshState', store.get('showSshrank'));
 		mainWindow.webContents.send('totalsState', store.get('showTotals'));
 		mainWindow.webContents.send('totalssState', store.get('showTotalss'));
+
+
 		mainWindow.webContents.send('apikey', store.get('apikey'));
 		mainWindow.webContents.send('usernameinput', store.get('username'));
-
-
-
+		mainWindow.webContents.send('mode', store.get('mode'));
 
 	});
 
