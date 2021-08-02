@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>First Run</title>
+<link rel="stylesheet" href="index.css">
+<body>
+    <form>
+        <label for="usernameinput">username:</label>
+        <input type="text" id="usernameinput" name="usernameinput"><br>
+        <label for="apikey">api key:</label>
+        <input type="text" id="apikey" name="apikey"><br>
+        <label for="mode">gamemode:</label>
+        <select name="mode" id="mode">
+          <option value=0>osu!</option>
+          <option value=1>osu!taiko</option>
+          <option value=2>osu!catch</option>
+          <option value=3>osu!mania</option>
+        </select> 
+      </form>
+      <button type="button" onclick="getInputs()">save credentials!</button>
+
+      <p>Input your username and API key and click save.</p>
+      <p>After saving, restart the app and you will be greeted with an empty screen. Click the settings icon in the top right to select which stats to show and click apply.</p>
+
+    <script>
+        const electron = require('electron');
+        const ipcRenderer = electron.ipcRenderer;
+        const remote = require('electron').remote;
+
+function getInputs() {
+  if (document.getElementById("usernameinput").value !== '') {
+  ipcRenderer.send('username', document.getElementById("usernameinput").value);
+  }
+  if (document.getElementById("apikey").value !== '') {
+  ipcRenderer.send('apikey', document.getElementById("apikey").value);
+  }
+  if (document.getElementById("mode").value !== '') {
+  ipcRenderer.send('mode', document.getElementById("mode").value);
+  }
+}
+    
+if (levelcheck.checked == true){
+    ipcRenderer.send('showLevel', true);
+    document.getElementById("levelchange").style.display = "flex";
+    document.getElementById("levelrow").style.display = "flex";
+  } else {
+    ipcRenderer.send('showLevel', false);
+    document.getElementById("levelchange").style.display = "none";
+    document.getElementById("levelrow").style.display = "none";
+  }
+
+  if (rankedscorecheck.checked == true){
+    ipcRenderer.send('showRankedscore', true);
+    document.getElementById("rankedscorechange").style.display = "flex";
+    document.getElementById("rankedscorerow").style.display = "flex";
+  } else {
+    ipcRenderer.send('showRankedscore', false);
+    document.getElementById("rankedscorechange").style.display = "none";
+    document.getElementById("rankedscorerow").style.display = "none";
+  }
+
+  if (totalscorecheck.checked == true){
+    ipcRenderer.send('showTotalscore', true);
+    document.getElementById("totalscorechange").style.display = "flex";
+    document.getElementById("totalscorerow").style.display = "flex";
+  } else {
+    ipcRenderer.send('showTotalscore', false);
+    document.getElementById("totalscorechange").style.display = "none";
+    document.getElementById("totalscorerow").style.display = "none";
+  }
+
+  if (pprankcheck.checked == true){
+    ipcRenderer.send('showPprank', true);
+    document.getElementById("pp_rank_change").style.display = "flex";
+    document.getElementById("pp_rank_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showPprank', false);
+    document.getElementById("pp_rank_change").style.display = "none";
+    document.getElementById("pp_rank_row").style.display = "none";
+  }
+  
+  if (countryrankcheck.checked == true){
+    ipcRenderer.send('showCountryrank', true);
+    document.getElementById("country_rank_change").style.display = "flex";
+    document.getElementById("country_rank_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showCountryrank', false);
+    document.getElementById("country_rank_change").style.display = "none";
+    document.getElementById("country_rank_row").style.display = "none";
+  }
+
+  if (ppcheck.checked == true){
+    ipcRenderer.send('showPp', true);
+    document.getElementById("ppchange").style.display = "flex";
+    document.getElementById("pp_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showPp', false);
+    document.getElementById("ppchange").style.display = "none";
+    document.getElementById("pp_row").style.display = "none";
+  }
+
+  if (acccheck.checked == true){
+    ipcRenderer.send('showAcc', true);
+    document.getElementById("accchange").style.display = "flex";
+    document.getElementById("accrow").style.display = "flex";
+  } else {
+    ipcRenderer.send('showAcc', false);
+    document.getElementById("accchange").style.display = "none";
+    document.getElementById("accrow").style.display = "none";
+  }
+
+  if (playcountcheck.checked == true){
+    ipcRenderer.send('showPlaycount', true);
+    document.getElementById("playcountchange").style.display = "flex";
+    document.getElementById("playcountrow").style.display = "flex";
+  } else {
+    ipcRenderer.send('showPlaycount', false);
+    document.getElementById("playcountchange").style.display = "none";
+    document.getElementById("playcountrow").style.display = "none";
+  }
+
+  if (playtimecheck.checked == true){
+    ipcRenderer.send('showPlaytime', true);
+    document.getElementById("playtimechange").style.display = "flex";
+    document.getElementById("playtimerow").style.display = "flex";
+  } else {
+    ipcRenderer.send('showPlaytime', false);
+    document.getElementById("playtimechange").style.display = "none";
+    document.getElementById("playtimerow").style.display = "none";
+  }
+
+  if (topplaycheck.checked == true){
+    ipcRenderer.send('showTopplay', true);
+    document.getElementById("top_play_change").style.display = "flex";
+    document.getElementById("top_play_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showTopplay', false);
+    document.getElementById("top_play_change").style.display = "none";
+    document.getElementById("top_play_row").style.display = "none";
+  }
+
+  if (rank_a_check.checked == true){
+    ipcRenderer.send('showArank', true);
+    document.getElementById("rank_a_change").style.display = "flex";
+    document.getElementById("rank_a_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showArank', false);
+    document.getElementById("rank_a_change").style.display = "none";
+    document.getElementById("rank_a_row").style.display = "none";
+  }
+
+  if (rank_s_check.checked == true){
+    ipcRenderer.send('showSrank', true);
+    document.getElementById("rank_s_change").style.display = "flex";
+    document.getElementById("rank_s_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showSrank', false);
+    document.getElementById("rank_s_change").style.display = "none";
+    document.getElementById("rank_s_row").style.display = "none";
+  }
+
+  if (rank_sh_check.checked == true){
+    ipcRenderer.send('showShrank', true);
+    document.getElementById("rank_sh_change").style.display = "flex";
+    document.getElementById("rank_sh_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showShrank', false);
+    document.getElementById("rank_sh_change").style.display = "none";
+    document.getElementById("rank_sh_row").style.display = "none";
+  }
+
+  if (rank_ss_check.checked == true){
+    ipcRenderer.send('showSsrank', true);
+    document.getElementById("rank_ss_change").style.display = "flex";
+    document.getElementById("rank_ss_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showSsrank', false);
+    document.getElementById("rank_ss_change").style.display = "none";
+    document.getElementById("rank_ss_row").style.display = "none";
+  }
+
+  if (rank_ssh_check.checked == true){
+    ipcRenderer.send('showSshrank', true);
+    document.getElementById("rank_ssh_change").style.display = "flex";
+    document.getElementById("rank_ssh_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showSshrank', false);
+    document.getElementById("rank_ssh_change").style.display = "none";
+    document.getElementById("rank_ssh_row").style.display = "none";
+  }
+
+  if (total_s_check.checked == true){
+    ipcRenderer.send('showTotals', true);
+    document.getElementById("total_s_change").style.display = "flex";
+    document.getElementById("total_s_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showTotals', false);
+    document.getElementById("total_s_change").style.display = "none";
+    document.getElementById("total_s_row").style.display = "none";
+  }
+
+  if (total_ss_check.checked == true){
+    ipcRenderer.send('showTotalss', true);
+    document.getElementById("total_ss_change").style.display = "flex";
+    document.getElementById("total_ss_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showTotalss', false);
+    document.getElementById("total_ss_change").style.display = "none";
+    document.getElementById("total_ss_row").style.display = "none";
+  }
+    </script>
+</body>
+</html> 
