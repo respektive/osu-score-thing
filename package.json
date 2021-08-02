@@ -15,6 +15,12 @@
   },
   "build": {
     "appId": "osu-score-thing",
+    "directories": {
+      "buildResources": "build"
+  },
+  "files": [
+    "build/**/*"
+  ],
     "linux": {
       "target": [
         "AppImage",
