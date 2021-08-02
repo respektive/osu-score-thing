@@ -15,14 +15,6 @@
   },
   "build": {
     "appId": "osu-score-thing",
-    "directories": {
-      "buildResources": "build"
-  },
-  "files": [
-    "build/**/*",
-    "package.json",
-    "electron-main.js"
-  ],
     "linux": {
       "target": [
         "AppImage",
@@ -60,16 +52,9 @@
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
+            "darwin",
+            "linux"
           ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
         }
       ]
     }
