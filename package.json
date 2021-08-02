@@ -19,7 +19,9 @@
       "buildResources": "build"
   },
   "files": [
-    "build/**/*"
+    "build/**/*",
+    "package.json",
+    "electron-main.js"
   ],
     "linux": {
       "target": [
