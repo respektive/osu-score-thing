@@ -254,7 +254,11 @@ getUserBest().then(userBest => {
 
 			updateUser();
 
-			mainWindow.webContents.send('username', profile.name);
+			if (profile == undefined) {
+				return;
+			} else {
+
+			mainWindow.webContents.send('username', profile.name)
 
 			mainWindow.webContents.send('level', formatter.format(level));
 			mainWindow.webContents.send('rankedscore', formatter.format(rankedscore));
@@ -332,6 +336,7 @@ getUserBest().then(userBest => {
 			var height = size[1];
 			store.set('width', width);
 			store.set('height', height);
+			}
 		}, 5000);
 		
 		mainWindow.webContents.send('levelState', store.get('showLevel'));
