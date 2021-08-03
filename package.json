@@ -18,15 +18,15 @@
     "linux": {
       "target": [
         "AppImage",
-        "zip"
+        "tar.gz"
       ],
       "category": "Utility"
     },
     "win": {
       "target": [
-        "nsis"
-      ],
-      "icon": "src/icon.ico"
+        "nsis",
+        "portable"
+      ]
     },
     "nsis": {
       "installerIcon": "src/icon.ico",
