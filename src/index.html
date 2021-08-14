@@ -87,7 +87,9 @@
       <label for="total_s_checkbox">Show Total S:</label> 
       <input type="checkbox" id="total_s_checkbox" checked><br> 
       <label for="total_ss_checkbox">Show Total SS:</label> 
-      <input type="checkbox" id="total_ss_checkbox" checked><br> 
+      <input type="checkbox" id="total_ss_checkbox" checked><br>
+      <label for="total_hits_checkbox">Show Total Hits:</label> 
+      <input type="checkbox" id="total_hits_checkbox" checked><br> 
 
       <button type="button" onclick="applyChecks()">apply</button>
     </form>
@@ -130,6 +132,10 @@
         <dl class="stats_entry" id="playtimerow">
           <dt class="stats_key">Play Time</dt>
           <dd class="stats_value" id="playtime"></dd>
+        </dl>
+        <dl class="stats_entry" id="total_hits_row">
+          <dt class="stats_key">Total Hits</dt>
+          <dd class="stats_value" id="total_hits"></dd>
         </dl>
         <dl class="stats_entry" id="top_play_row">
           <dt class="stats_key">Top Play</dt>
@@ -174,6 +180,7 @@
         <dd class="update_value" id="accchange"></dd>
         <dd class="update_value" id="playcountchange"></dd>
         <dd class="update_value" id="playtimechange"></dd>
+        <dd class="update_value" id="total_hits_change"></dd>
         <dd class="update_value" id="top_play_change"></dd>
         <dd class="update_value" id="rank_a_change"></dd>
         <dd class="update_value" id="rank_s_change"></dd>
@@ -229,6 +236,7 @@ function applyChecks () {
   var rank_ssh_check = document.getElementById("rank_ssh_checkbox");
   var total_s_check = document.getElementById("total_s_checkbox");
   var total_ss_check = document.getElementById("total_ss_checkbox");
+  var total_hits_check = document.getElementById("total_hits_checkbox");
 
   
   if (levelcheck.checked == true){
@@ -401,6 +409,16 @@ function applyChecks () {
     document.getElementById("total_ss_row").style.display = "none";
   }
 
+  if (total_hits_check.checked == true){
+    ipcRenderer.send('showTotalhits', true);
+    document.getElementById("total_hits_change").style.display = "flex";
+    document.getElementById("total_hits_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showTotalhits', false);
+    document.getElementById("total_hits_change").style.display = "none";
+    document.getElementById("total_hits_row").style.display = "none";
+  }
+
 }
 
 
@@ -526,6 +544,10 @@ function handleWindowControls() {
 
       ipcRenderer.on('total_ss', (event, data) => {
         document.getElementById("total_ss").innerHTML = data; 
+      });
+
+      ipcRenderer.on('total_hits', (event, data) => {
+        document.getElementById("total_hits").innerHTML = data; 
       });
 
       ipcRenderer.on('levelchange', (event, data) => {
@@ -717,6 +739,18 @@ function handleWindowControls() {
         }
       });
 
+      ipcRenderer.on('total_hits_change', (event, data) => {
+        if (data > '0') {
+          document.getElementById("total_hits_change").innerHTML = '+' + data;
+          document.getElementById("total_hits_change").style.color = "green";
+        } else if (data < '0') {
+          document.getElementById("total_hits_change").innerHTML = data;
+          document.getElementById("total_hits_change").style.color = "red";
+        } else {
+          document.getElementById("total_hits_change").innerHTML = '';  
+        }
+      });
+
       ipcRenderer.on('levelState', (event, data) => {
         if (data == true) {
           document.getElementById('levelcheckbox').setAttribute("checked", "")
@@ -828,6 +862,13 @@ function handleWindowControls() {
           document.getElementById('total_s_checkbox').setAttribute("checked", "")
         } else {
           document.getElementById('total_s_checkbox').removeAttribute("checked")
+        }
+      });
+      ipcRenderer.on('totalhitsState', (event, data) => {
+        if (data == true) {
+          document.getElementById('total_hits_checkbox').setAttribute("checked", "")
+        } else {
+          document.getElementById('total_hits_checkbox').removeAttribute("checked")
         }
       });
       ipcRenderer.on('totalssState', (event, data) => {

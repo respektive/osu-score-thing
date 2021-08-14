@@ -1,7 +1,7 @@
 {
   "name": "osu-score-thing",
   "productName": "osu!scorething",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "osu-profile-like statistics tracker",
   "main": "src/index.js",
   "scripts": {
