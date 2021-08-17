@@ -72,6 +72,9 @@ const store = new Store();
 	ipcMain.on('showTotalhits', (event, arg) => {
 		store.set('showTotalhits', arg);
 	});
+	ipcMain.on('showHpp', (event, arg) => {
+		store.set('showHpp', arg);
+	});
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -180,6 +183,8 @@ let top_play = '';
 let top_play_old = '';
 let total_hits = '';
 let total_hits_old = '';
+let hpp = '';
+let hpp_old = '';
 
 let profile = '';
 
@@ -223,6 +228,7 @@ function updateUser() {
 		country_rank = user.pp.countryRank
 		pp = user.pp.raw
 		total_hits = Number(user.counts[50]) + Number(user.counts[100]) + Number(user.counts[300])
+		hpp = (Number(user.counts[50]) + Number(user.counts[100]) + Number(user.counts[300])) / user.counts.plays
 	})
 	getUserBest().then(userBest => {
 		top_play = userBest[0].pp
@@ -247,6 +253,7 @@ getUser().then(user => {
 	country_rank_old = user.pp.countryRank
 	pp_old = user.pp.raw
 	total_hits_old = Number(user.counts[50]) + Number(user.counts[100]) + Number(user.counts[300])
+	hpp_old = (Number(user.counts[50]) + Number(user.counts[100]) + Number(user.counts[300])) / user.counts.plays
 })
 
 getUserBest().then(userBest => {
@@ -284,6 +291,7 @@ getUserBest().then(userBest => {
 			mainWindow.webContents.send('total_s', formatter.format(total_s));
 			mainWindow.webContents.send('total_ss', formatter.format(total_ss));
 			mainWindow.webContents.send('total_hits', formatter.format(total_hits));
+			mainWindow.webContents.send('hpp', formatter.format(hpp));
 
 			mainWindow.webContents.send('levelchange', formatter.format(level - level_old));
 			mainWindow.webContents.send('rankedscorechange', formatter.format(rankedscore - rankedscore_old));
@@ -303,6 +311,7 @@ getUserBest().then(userBest => {
 			mainWindow.webContents.send('total_s_change', formatter.format(total_s - total_s_old));
 			mainWindow.webContents.send('total_ss_change', formatter.format(total_ss - total_ss_old));
 			mainWindow.webContents.send('total_hits_change', formatter.format(total_hits - total_hits_old));
+			mainWindow.webContents.send('hpp_change', formatter.format(hpp - hpp_old));
 		
 			fs.outputFile(documentsPath + 'level.txt', formatter.format(level), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'rankedscore.txt', formatter.format(rankedscore), err => {if (err) {console.error(err); return}});
@@ -322,6 +331,7 @@ getUserBest().then(userBest => {
 			fs.outputFile(documentsPath + 'countryrank.txt', formatter.format(country_rank), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'pp.txt', formatter.format(pp), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'topplay.txt', formatter.format(top_play), err => {if (err) {console.error(err); return}});
+			fs.outputFile(documentsPath + 'hits_per_play.txt', formatter.format(hpp), err => {if (err) {console.error(err); return}});
 
 			fs.outputFile(documentsPath + 'levelchange.txt', formatter.format(level - level_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'rankedscorechange.txt', formatter.format(rankedscore - rankedscore_old), err => {if (err) {console.error(err); return}});
@@ -341,6 +351,7 @@ getUserBest().then(userBest => {
 			fs.outputFile(documentsPath + 'countryrankchange.txt', formatter.format(country_rank - country_rank_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'ppchange.txt', formatter.format(pp - pp_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'topplaychange.txt', formatter.format(top_play - top_play_old), err => {if (err) {console.error(err); return}});
+			fs.outputFile(documentsPath + 'hits_per_play_change.txt', formatter.format(hpp - hpp_old), err => {if (err) {console.error(err); return}});
 			var size   = mainWindow.getSize();
 			var width  = size[0];
 			var height = size[1];
@@ -367,6 +378,7 @@ getUserBest().then(userBest => {
 		mainWindow.webContents.send('totalsState', store.get('showTotals'));
 		mainWindow.webContents.send('totalssState', store.get('showTotalss'));
 		mainWindow.webContents.send('totalhitsState', store.get('showTotalhits'));
+		mainWindow.webContents.send('hppState', store.get('showHpp'));
 
 
 		mainWindow.webContents.send('apikey', store.get('apikey'));

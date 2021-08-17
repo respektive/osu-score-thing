@@ -51,7 +51,7 @@
         <option id="select3" value=3>osu!mania</option>
       </select> 
     </form>
-  <p>updating credentials requires restart</p>
+  <p style="display:inline">updating credentials requires restart</p>
     <button type="button" onclick="getInputs()">save credentials!</button><br>
     <form>
       <label for="levelcheckbox">Show Level:</label> 
@@ -87,9 +87,11 @@
       <label for="total_s_checkbox">Show Total S:</label> 
       <input type="checkbox" id="total_s_checkbox" checked><br> 
       <label for="total_ss_checkbox">Show Total SS:</label> 
-      <input type="checkbox" id="total_ss_checkbox" checked><br>
+      <input type="checkbox" id="total_ss_checkbox" checked>
       <label for="total_hits_checkbox">Show Total Hits:</label> 
       <input type="checkbox" id="total_hits_checkbox" checked><br> 
+      <label for="hpp_checkbox">Show Hits per Play:</label> 
+      <input type="checkbox" id="hpp_checkbox" checked><br> 
 
       <button type="button" onclick="applyChecks()">apply</button>
     </form>
@@ -137,6 +139,10 @@
           <dt class="stats_key">Total Hits</dt>
           <dd class="stats_value" id="total_hits"></dd>
         </dl>
+        <dl class="stats_entry" id="hpp_row">
+          <dt class="stats_key">Hits per Play</dt>
+          <dd class="stats_value" id="hpp"></dd>
+        </dl>
         <dl class="stats_entry" id="top_play_row">
           <dt class="stats_key">Top Play</dt>
           <dd class="stats_value" id="top_play"></dd>
@@ -181,6 +187,7 @@
         <dd class="update_value" id="playcountchange"></dd>
         <dd class="update_value" id="playtimechange"></dd>
         <dd class="update_value" id="total_hits_change"></dd>
+        <dd class="update_value" id="hpp_change"></dd>
         <dd class="update_value" id="top_play_change"></dd>
         <dd class="update_value" id="rank_a_change"></dd>
         <dd class="update_value" id="rank_s_change"></dd>
@@ -237,6 +244,7 @@ function applyChecks () {
   var total_s_check = document.getElementById("total_s_checkbox");
   var total_ss_check = document.getElementById("total_ss_checkbox");
   var total_hits_check = document.getElementById("total_hits_checkbox");
+  var hpp_check = document.getElementById("hpp_checkbox");
 
   
   if (levelcheck.checked == true){
@@ -419,6 +427,16 @@ function applyChecks () {
     document.getElementById("total_hits_row").style.display = "none";
   }
 
+  if (hpp_check.checked == true){
+    ipcRenderer.send('showHpp', true);
+    document.getElementById("hpp_change").style.display = "flex";
+    document.getElementById("hpp_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showHpp', false);
+    document.getElementById("hpp_change").style.display = "none";
+    document.getElementById("hpp_row").style.display = "none";
+  }
+
 }
 
 
@@ -548,6 +566,10 @@ function handleWindowControls() {
 
       ipcRenderer.on('total_hits', (event, data) => {
         document.getElementById("total_hits").innerHTML = data; 
+      });
+
+      ipcRenderer.on('hpp', (event, data) => {
+        document.getElementById("hpp").innerHTML = data; 
       });
 
       ipcRenderer.on('levelchange', (event, data) => {
@@ -751,6 +773,18 @@ function handleWindowControls() {
         }
       });
 
+      ipcRenderer.on('hpp_change', (event, data) => {
+        if (data > '0') {
+          document.getElementById("hpp_change").innerHTML = '+' + data;
+          document.getElementById("hpp_change").style.color = "green";
+        } else if (data < '0') {
+          document.getElementById("hpp_change").innerHTML = data;
+          document.getElementById("hpp_change").style.color = "red";
+        } else {
+          document.getElementById("hpp_change").innerHTML = '';  
+        }
+      });
+
       ipcRenderer.on('levelState', (event, data) => {
         if (data == true) {
           document.getElementById('levelcheckbox').setAttribute("checked", "")
@@ -878,6 +912,14 @@ function handleWindowControls() {
           document.getElementById('total_ss_checkbox').removeAttribute("checked")
         }
       });
+      ipcRenderer.on('hppState', (event, data) => {
+        if (data == true) {
+          document.getElementById('hpp_checkbox').setAttribute("checked", "")
+        } else {
+          document.getElementById('hpp_checkbox').removeAttribute("checked")
+        }
+      });
+
 
       ipcRenderer.on('usernameinput', (event, data) => {
         document.getElementById("usernameinput").setAttribute("value", data)
