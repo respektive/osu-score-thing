@@ -131,6 +131,7 @@ body {
 }
 .stats_key{
   padding-top: 5px;
+  min-width: 115px;
 }
 .stats_value {
   margin: 0;
@@ -161,7 +162,7 @@ body {
   border-style: solid;
   border-width: 1px;
   border-color: lightgray;
-  margin: 5px 0;
+  margin-left: 5px;
 }
 .update_value:hover {
   border-color: gray;

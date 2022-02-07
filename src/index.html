@@ -88,8 +88,10 @@
       <input type="checkbox" id="total_s_checkbox" checked><br> 
       <label for="total_ss_checkbox">Show Total SS:</label> 
       <input type="checkbox" id="total_ss_checkbox" checked>
+      <label for="total_ss_checkbox">Show Clears:</label> 
+      <input type="checkbox" id="clears_checkbox" checked><br>
       <label for="total_hits_checkbox">Show Total Hits:</label> 
-      <input type="checkbox" id="total_hits_checkbox" checked><br> 
+      <input type="checkbox" id="total_hits_checkbox" checked>
       <label for="hpp_checkbox">Show Hits per Play:</label> 
       <input type="checkbox" id="hpp_checkbox" checked><br> 
 
@@ -102,107 +104,111 @@
         <dl class="stats_entry" id="levelrow">
           <dt class="stats_key">Level</dt>
           <dd class="stats_value" id="level"></dd>
+          <dd class="update_value" id="levelchange"></dd>
         </dl>
         <dl class="stats_entry" id="rankedscorerow">
           <dt class="stats_key">Ranked Score</dt>
           <dd class="stats_value" id="rankedscore"></dd>
+          <dd class="update_value" id="rankedscorechange"></dd>
         </dl>
         <dl class="stats_entry" id="totalscorerow">
           <dt class="stats_key">Total Score</dt>
           <dd class="stats_value" id="totalscore"></dd>
+          <dd class="update_value" id="totalscorechange"></dd>
         </dl>
         <dl class="stats_entry" id="pp_rank_row">
           <dt class="stats_key">PP Rank</dt>
           <dd class="stats_value" id="pp_rank"></dd>
+          <dd class="update_value" id="pp_rank_change"></dd>
         </dl>
         <dl class="stats_entry" id="country_rank_row">
           <dt class="stats_key">Country Rank</dt>
           <dd class="stats_value" id="country_rank"></dd>
+          <dd class="update_value" id="country_rank_change"></dd>
         </dl>
         <dl class="stats_entry" id="pp_row">
           <dt class="stats_key">PP</dt>
           <dd class="stats_value" id="pp"></dd>
+          <dd class="update_value" id="ppchange"></dd>
         </dl>
         <dl class="stats_entry" id="accrow">
           <dt class="stats_key">Hit Accuracy</dt>
           <dd class="stats_value" id="acc"></dd>
+          <dd class="update_value" id="accchange"></dd>
         </dl>
         <dl class="stats_entry" id="playcountrow">
           <dt class="stats_key">Play Count</dt>
           <dd class="stats_value" id="playcount"></dd>
+          <dd class="update_value" id="playcountchange"></dd>
         </dl>
         <dl class="stats_entry" id="playtimerow">
           <dt class="stats_key">Play Time</dt>
           <dd class="stats_value" id="playtime"></dd>
+          <dd class="update_value" id="playtimechange"></dd>
         </dl>
         <dl class="stats_entry" id="total_hits_row">
           <dt class="stats_key">Total Hits</dt>
           <dd class="stats_value" id="total_hits"></dd>
+          <dd class="update_value" id="total_hits_change"></dd>
         </dl>
         <dl class="stats_entry" id="hpp_row">
           <dt class="stats_key">Hits per Play</dt>
           <dd class="stats_value" id="hpp"></dd>
+          <dd class="update_value" id="hpp_change"></dd>
         </dl>
         <dl class="stats_entry" id="top_play_row">
           <dt class="stats_key">Top Play</dt>
           <dd class="stats_value" id="top_play"></dd>
+          <dd class="update_value" id="top_play_change"></dd>
         </dl>
         <dl class="stats_entry" id="rank_a_row">
           <dt class="stats_key">Rank A</dt>
           <dd class="stats_value" id="rank_a"></dd>
+          <dd class="update_value" id="rank_a_change"></dd>
         </dl>
         <dl class="stats_entry" id="rank_s_row">
           <dt class="stats_key">Rank S</dt>
           <dd class="stats_value" id="rank_s"></dd>
+          <dd class="update_value" id="rank_s_change"></dd>
         </dl>
         <dl class="stats_entry" id="rank_sh_row">
           <dt class="stats_key">Rank SH</dt>
           <dd class="stats_value" id="rank_sh"></dd>
+          <dd class="update_value" id="rank_sh_change"></dd>
         </dl>
         <dl class="stats_entry" id="rank_ss_row">
           <dt class="stats_key">Rank SS</dt>
           <dd class="stats_value" id="rank_ss"></dd>
+          <dd class="update_value" id="rank_ss_change"></dd>
         </dl>
         <dl class="stats_entry" id="rank_ssh_row">
           <dt class="stats_key">Rank SSH</dt>
           <dd class="stats_value" id="rank_ssh"></dd>
+          <dd class="update_value" id="rank_ssh_change"></dd>
         </dl>
         <dl class="stats_entry" id="total_s_row">
           <dt class="stats_key">Total S</dt>
           <dd class="stats_value" id="total_s"></dd>
+          <dd class="update_value" id="total_s_change"></dd>
         </dl>
         <dl class="stats_entry" id="total_ss_row">
           <dt class="stats_key">Total SS</dt>
           <dd class="stats_value" id="total_ss"></dd>
+          <dd class="update_value" id="total_ss_change"></dd>
+        </dl>
+        <dl class="stats_entry" id="clears_row">
+          <dt class="stats_key">Profile Clears</dt>
+          <dd class="stats_value" id="clears"></dd>
+          <dd class="update_value" id="clears_change"></dd>
         </dl>
       </div>
-      <div class="update">
-        <dd class="update_value" id="levelchange"></dd>
-        <dd class="update_value" id="rankedscorechange"></dd>
-        <dd class="update_value" id="totalscorechange"></dd>
-        <dd class="update_value" id="pp_rank_change"></dd>
-        <dd class="update_value" id="country_rank_change"></dd>
-        <dd class="update_value" id="ppchange"></dd>
-        <dd class="update_value" id="accchange"></dd>
-        <dd class="update_value" id="playcountchange"></dd>
-        <dd class="update_value" id="playtimechange"></dd>
-        <dd class="update_value" id="total_hits_change"></dd>
-        <dd class="update_value" id="hpp_change"></dd>
-        <dd class="update_value" id="top_play_change"></dd>
-        <dd class="update_value" id="rank_a_change"></dd>
-        <dd class="update_value" id="rank_s_change"></dd>
-        <dd class="update_value" id="rank_sh_change"></dd>
-        <dd class="update_value" id="rank_ss_change"></dd>
-        <dd class="update_value" id="rank_ssh_change"></dd>
-        <dd class="update_value" id="total_s_change"></dd>
-        <dd class="update_value" id="total_ss_change"></dd>
-      </div>
     </div>
+
     <script>
       const electron = require('electron');
       const ipcRenderer = electron.ipcRenderer;
       const remote = require('electron').remote;
-  
+
       function showSettings() {
   var x = document.getElementById("settings");
   if (x.style.display === "none") {
@@ -243,6 +249,7 @@ function applyChecks () {
   var rank_ssh_check = document.getElementById("rank_ssh_checkbox");
   var total_s_check = document.getElementById("total_s_checkbox");
   var total_ss_check = document.getElementById("total_ss_checkbox");
+  var clears_check = document.getElementById("clears_checkbox");
   var total_hits_check = document.getElementById("total_hits_checkbox");
   var hpp_check = document.getElementById("hpp_checkbox");
 
@@ -417,6 +424,16 @@ function applyChecks () {
     document.getElementById("total_ss_row").style.display = "none";
   }
 
+  if (clears_check.checked == true){
+    ipcRenderer.send('showClears', true);
+    document.getElementById("clears_change").style.display = "flex";
+    document.getElementById("clears_row").style.display = "flex";
+  } else {
+    ipcRenderer.send('showClears', false);
+    document.getElementById("clears_change").style.display = "none";
+    document.getElementById("clears_row").style.display = "none";
+  }
+
   if (total_hits_check.checked == true){
     ipcRenderer.send('showTotalhits', true);
     document.getElementById("total_hits_change").style.display = "flex";
@@ -562,6 +579,10 @@ function handleWindowControls() {
 
       ipcRenderer.on('total_ss', (event, data) => {
         document.getElementById("total_ss").innerHTML = data; 
+      });
+
+      ipcRenderer.on('clears', (event, data) => {
+        document.getElementById("clears").innerHTML = data; 
       });
 
       ipcRenderer.on('total_hits', (event, data) => {
@@ -761,6 +782,18 @@ function handleWindowControls() {
         }
       });
 
+      ipcRenderer.on('clears_change', (event, data) => {
+        if (data > '0') {
+          document.getElementById("clears_change").innerHTML = '+' + data;
+          document.getElementById("clears_change").style.color = "green";
+        } else if (data < '0') {
+          document.getElementById("clears_change").innerHTML = data;
+          document.getElementById("clears_change").style.color = "red";
+        } else {
+          document.getElementById("clears_change").innerHTML = '';  
+        }
+      });
+
       ipcRenderer.on('total_hits_change', (event, data) => {
         if (data > '0') {
           document.getElementById("total_hits_change").innerHTML = '+' + data;
@@ -896,6 +929,13 @@ function handleWindowControls() {
           document.getElementById('total_s_checkbox').setAttribute("checked", "")
         } else {
           document.getElementById('total_s_checkbox').removeAttribute("checked")
+        }
+      });
+      ipcRenderer.on('clearsState', (event, data) => {
+        if (data == true) {
+          document.getElementById('clears_checkbox').setAttribute("checked", "")
+        } else {
+          document.getElementById('clears_checkbox').removeAttribute("checked")
         }
       });
       ipcRenderer.on('totalhitsState', (event, data) => {

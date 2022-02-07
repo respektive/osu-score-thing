@@ -69,6 +69,9 @@ const store = new Store();
 	ipcMain.on('showTotalss', (event, arg) => {
 		store.set('showTotalss', arg);
 	});
+	ipcMain.on('showClears', (event, arg) => {
+		store.set('showClears', arg);
+	});
 	ipcMain.on('showTotalhits', (event, arg) => {
 		store.set('showTotalhits', arg);
 	});
@@ -171,6 +174,8 @@ let total_ss = '';
 let total_ss_old = '';
 let total_s = '';
 let total_s_old = '';
+let clears = '';
+let clears_old = '';
 let playtime = '';
 let playtime_old = '';
 let pp_rank = '';
@@ -224,6 +229,7 @@ function updateUser() {
 		rank_ssh = user.counts.SSH
 		total_ss = parseInt(user.counts.SS) + parseInt(user.counts.SSH)
 		total_s = parseInt(user.counts.S) + parseInt(user.counts.SH)
+		clears = parseInt(user.counts.S) + parseInt(user.counts.SH) + parseInt(user.counts.SS) + parseInt(user.counts.SSH) + parseInt(user.counts.A)
 		pp_rank = user.pp.rank
 		country_rank = user.pp.countryRank
 		pp = user.pp.raw
@@ -249,6 +255,7 @@ getUser().then(user => {
 	rank_ssh_old = user.counts.SSH
 	total_ss_old = parseInt(user.counts.SS) + parseInt(user.counts.SSH)
 	total_s_old = parseInt(user.counts.S) + parseInt(user.counts.SH)
+	clears_old = parseInt(user.counts.S) + parseInt(user.counts.SH) + parseInt(user.counts.SS) + parseInt(user.counts.SSH) + parseInt(user.counts.A)
 	pp_rank_old = user.pp.rank
 	country_rank_old = user.pp.countryRank
 	pp_old = user.pp.raw
@@ -290,6 +297,7 @@ getUserBest().then(userBest => {
 			mainWindow.webContents.send('rank_ssh', formatter.format(rank_ssh));		
 			mainWindow.webContents.send('total_s', formatter.format(total_s));
 			mainWindow.webContents.send('total_ss', formatter.format(total_ss));
+			mainWindow.webContents.send('clears', formatter.format(clears));
 			mainWindow.webContents.send('total_hits', formatter.format(total_hits));
 			mainWindow.webContents.send('hpp', formatter.format(hpp));
 
@@ -310,6 +318,7 @@ getUserBest().then(userBest => {
 			mainWindow.webContents.send('rank_ssh_change', formatter.format(rank_ssh - rank_ssh_old));
 			mainWindow.webContents.send('total_s_change', formatter.format(total_s - total_s_old));
 			mainWindow.webContents.send('total_ss_change', formatter.format(total_ss - total_ss_old));
+			mainWindow.webContents.send('clears_change', formatter.format(clears - clears_old));
 			mainWindow.webContents.send('total_hits_change', formatter.format(total_hits - total_hits_old));
 			mainWindow.webContents.send('hpp_change', formatter.format(hpp - hpp_old));
 		
@@ -326,6 +335,7 @@ getUserBest().then(userBest => {
 			fs.outputFile(documentsPath + 'rank_ssh.txt', formatter.format(rank_ssh), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'total_ss.txt', formatter.format(total_ss), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'total_s.txt', formatter.format(total_s), err => {if (err) {console.error(err); return}});
+			fs.outputFile(documentsPath + 'clears.txt', formatter.format(clears), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'total_hits.txt', formatter.format(total_hits), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'pprank.txt', formatter.format(pp_rank), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'countryrank.txt', formatter.format(country_rank), err => {if (err) {console.error(err); return}});
@@ -346,6 +356,7 @@ getUserBest().then(userBest => {
 			fs.outputFile(documentsPath + 'rank_ssh_change.txt', formatter.format(rank_ssh - rank_ssh_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'total_ss_change.txt', formatter.format(total_ss -total_ss_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'total_s_change.txt', formatter.format(total_s - total_s_old), err => {if (err) {console.error(err); return}});
+			fs.outputFile(documentsPath + 'clears_change.txt', formatter.format(clears - clears_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'total_hits_change.txt', formatter.format(total_hits - total_hits_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'pprankchange.txt', formatter.format(pp_rank - pp_rank_old), err => {if (err) {console.error(err); return}});
 			fs.outputFile(documentsPath + 'countryrankchange.txt', formatter.format(country_rank - country_rank_old), err => {if (err) {console.error(err); return}});
@@ -377,6 +388,7 @@ getUserBest().then(userBest => {
 		mainWindow.webContents.send('ranksshState', store.get('showSshrank'));
 		mainWindow.webContents.send('totalsState', store.get('showTotals'));
 		mainWindow.webContents.send('totalssState', store.get('showTotalss'));
+		mainWindow.webContents.send('clearsState', store.get('showClears'));
 		mainWindow.webContents.send('totalhitsState', store.get('showTotalhits'));
 		mainWindow.webContents.send('hppState', store.get('showHpp'));
 
